@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Neutra Text TF Bold';
+    src: local('Neutra Text TF Bold'), url(./fonts/NeutraTextTFBold.otf) format('opentype');
+}
+@font-face {
+    font-family: 'Neutra Text TF Bold Italic';
+    src: local('Neutra Text TF Bold Italic'), url(./fonts/NeutraTextTFBoldItalic.otf) format('opentype');
+}
