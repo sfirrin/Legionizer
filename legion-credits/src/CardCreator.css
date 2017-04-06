@@ -7,6 +7,7 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     /*background: rgba(255, 255, 255, .3);*/
+    overflow: auto;
 }
 
 input:focus,
@@ -17,8 +18,10 @@ textarea:focus {
 
 .title-input,
 .names-input {
-    /*line-height: 2em;*/
-    height: 1em;
+    min-height: 1.3em;
+    /*height: 1em;*/
+    padding-top: .25em;
+    /*padding-bottom: .2em;*/
     font-size: 3em;
     border-width: 0;
     background: none;
@@ -38,5 +41,12 @@ textarea:focus {
 }
 
 .input-row {
-    margin-top: 1em;
+    margin-top: 1em
+}
+
+.instructions {
+    font-size: 3em;
+    font-family: 'Neutra Text TF Bold Italic';
+    text-decoration: underline;
+    text-align: center;
 }
