@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import CardDisplay from './CardDisplay'
+import CardCreator from './CardCreator'
 import './index.css'
 import './fonts.css'
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'// import Routes from './routes'
 
 // ReactDOM.render(
@@ -23,7 +23,8 @@ class TestAbout extends Component {
 ReactDOM.render(
     <Router>
         <div>
-            <Route exact path="/" component={App} />
+            <Route path="/create" component={CardCreator} />
+            <Route path="/show" component={CardDisplay} />
             <Route path="/about" component={TestAbout} />
         </div>
 

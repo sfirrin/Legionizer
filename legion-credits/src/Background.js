@@ -38,34 +38,55 @@ class Background extends Component {
 
     }
     render() {
-        return (
-            <Stage 
+        const purpleRect = (
+            <Rectangle 
+                x={this.props.purple.x}
+                y={this.props.purple.y}
+                width={this.props.purple.width}
+                height={this.props.purple.height}
+                fill={PURPLE_HEX}
+            />
+        )
+        const greenRect = (
+            <Rectangle 
+                x={this.props.green.x}
+                y={this.props.green.y}
+                width={this.props.green.width}
+                height={this.props.green.height}
+                fill={GREEN_HEX}
+            />
+        )
+        const grayRect = (
+            <Rectangle 
+                x='0' 
+                y='0' 
                 width={this.state.canvasWidth} 
                 height={this.state.canvasHeight}
-            >
+                fill={GRAY_HEX}
+            />
+        )
+        const purpleOnTop = Math.random() > 0.5
+        let layer = null
+        if (purpleOnTop) {
+            layer = (
                 <Layer>
-                    <Rectangle 
-                        x='0' 
-                        y='0' 
-                        width={this.state.canvasWidth} 
-                        height={this.state.canvasHeight}
-                        fill={GRAY_HEX}
-                    />
-                    <Rectangle 
-                        x={this.props.purple.x}
-                        y={this.props.purple.y}
-                        width={this.props.purple.width}
-                        height={this.props.purple.height}
-                        fill={PURPLE_HEX}
-                    />
-                    <Rectangle 
-                        x={this.props.green.x}
-                        y={this.props.green.y}
-                        width={this.props.green.width}
-                        height={this.props.green.height}
-                        fill={GREEN_HEX}
-                    />
+                    {grayRect}
+                    {greenRect}
+                    {purpleRect}
                 </Layer>
+            )
+        } else {
+            layer = (
+                <Layer>
+                    {grayRect}
+                    {purpleRect}
+                    {greenRect}
+                </Layer>
+            )
+        }
+        return (
+            <Stage width={this.state.canvasWidth} height={this.state.canvasHeight}>
+                {layer}
             </Stage>
         )
     }

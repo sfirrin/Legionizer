@@ -1,0 +1,53 @@
+.text-container {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.title {
+    font-size: 4em;
+    font-family: 'Neutra Text TF Bold Italic';
+    float: left;
+    width: 100%;
+}
+.name {
+    text-transform: uppercase;
+    font-size: 5em;
+    font-family: 'Neutra Text TF Bold';
+    float: left;
+    width: 100%;
+}
+
+
+@media (max-width: 599px) { 
+    html {
+        font-size: 5px;
+    }
+}
+
+@media (min-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 900px) {
+    html {
+        font-size: 10px;
+    } 
+}
+
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 1800px) {
+    html {
+        font-size: 14px;
+    }
+}

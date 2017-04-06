@@ -1,0 +1,42 @@
+
+.creator-container {
+    min-width: 70%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    /*background: rgba(255, 255, 255, .3);*/
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, .2);
+}
+
+.title-input,
+.names-input {
+    /*line-height: 2em;*/
+    height: 1em;
+    font-size: 3em;
+    border-width: 0;
+    background: none;
+    width: 50%;
+    text-align: center;
+    resize: none;
+    overflow: hidden;
+}
+
+.title-input {
+    font-family: 'Neutra Text TF Bold Italic';
+    
+}
+
+.names-input {
+    font-family: 'Neutra Text TF Bold';
+}
+
+.input-row {
+    margin-top: 1em;
+}
