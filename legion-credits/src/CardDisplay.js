@@ -26,8 +26,19 @@ class CardDisplay extends Component {
             green: getRandomDimensions(),
             tick: 0,
             currentCardIndex: 0,
-            cards: defaultCredits,
+            cards: defaultCredits
         }
+        if (this.props.id != '') {
+            fetch(`/credits/${this.props.id}`).then((response) => {
+                return response.json()
+            }).then((loadedCards) => {
+                console.log(loadedCards)
+                this.setState({
+                    cards: loadedCards.cards
+                })
+            })
+        }
+
     }
     componentDidMount() {
         setInterval(() => {

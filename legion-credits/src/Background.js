@@ -25,7 +25,8 @@ class Background extends Component {
         super(...args)
         this.state = {
             canvasWidth: window.innerWidth,
-            canvasHeight: window.innerHeight
+            canvasHeight: window.innerHeight,
+            purpleOnTop: Math.random() > 0.5
         }
     }
     componentDidMount() {
@@ -65,9 +66,8 @@ class Background extends Component {
                 fill={GRAY_HEX}
             />
         )
-        const purpleOnTop = Math.random() > 0.5
         let layer = null
-        if (purpleOnTop) {
+        if (this.state.purpleOnTop) {
             layer = (
                 <Layer>
                     {grayRect}

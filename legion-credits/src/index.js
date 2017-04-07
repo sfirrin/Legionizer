@@ -8,6 +8,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'// import Routes from './routes'
+import {defaultCredits} from './defaultcredits'
 
 // ReactDOM.render(
 //   <App />,
@@ -20,12 +21,17 @@ class TestAbout extends Component {
     }
 }
 
+const IdDisplay = ({ match }) => (
+    <CardDisplay id={match.params.id} />
+)
+
 ReactDOM.render(
     <Router>
         <div>
-            <Route path="/create" component={CardCreator} />
-            <Route path="/show" component={CardDisplay} />
+            <Route exact path="/" component={CardCreator} />
+            <Route exact path="/show" render={()=><CardDisplay id=''/>} />
             <Route path="/about" component={TestAbout} />
+            <Route path="/show/:id" component={IdDisplay} />
         </div>
 
     </Router>,

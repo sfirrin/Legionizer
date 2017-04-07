@@ -5,6 +5,8 @@ import Background from './Background'
 import {getRandomDimensions} from './helpers'
 import './CardCreator.css'
 import {defaultCredits} from './defaultcredits'
+import { Link } from 'react-router-dom'
+const crypto = require('crypto')
 
 class CardForm extends React.Component {
     constructor(props) {
@@ -12,9 +14,6 @@ class CardForm extends React.Component {
         this.state = {title: '', names: ''};
 
         this.handleChange = this.handleChange.bind(this);
-    }
-    componentDidMount() {
-        
     }
 
     handleChange(event) {
@@ -58,14 +57,26 @@ class CardCreator extends Component {
         this.state = {
             purple: getRandomDimensions(),
             green: getRandomDimensions(),
-            cardValues: []
+            cardValues: [],
+            id: crypto.randomBytes(20).toString('hex')
         }
         // this.reportState = this.reportState.bind(this)
         this.submit = this.submit.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
     }
     submit() {
-        console.log(this.state)
+        // console.log(this.state)
+        const listifiedValues = this.state.cardValues.map((card) => {
+            return {title: card.title, names: card.names.split('\n')}
+        })
+        fetch('/credits', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({cards: listifiedValues, id: this.state.id})
+        }).then(console.log)
     }
     handleInputChange(index, inputName, value) {
         const newValues = this.state.cardValues.slice()
@@ -81,7 +92,11 @@ class CardCreator extends Component {
         let placeholderCards = []
         defaultCredits.map((holder, index) => {
             placeholderCards.push(
-                <CardForm index={index} key={index} placeholder={holder} handleInputChange={this.handleInputChange}/>
+                <CardForm 
+                    index={index} key={index} 
+                    placeholder={holder} 
+                    handleInputChange={this.handleInputChange}
+                />
             )
         })
         return (
@@ -92,7 +107,7 @@ class CardCreator extends Component {
                         Replace these titles and names with your own
                     </div>
                     {placeholderCards}
-                    <button value="Submit" onClick={this.submit}>Button text</button>
+                    <Link to={'/show/' + this.state.id} value="Submit" onClick={this.submit}>Button text</Link>
                 </div>
             </div>
         )
