@@ -33,7 +33,7 @@ app.use(bodyParser.json())
 
 
 // Serve static assets
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '..', 'build')));
 
 app.get('/credits/:id', (req, res) => {
     Credits.findOne({ id: req.params.id }, 'cards', (err, credits) => {
@@ -58,7 +58,7 @@ app.post('/credits', (req, res) => {
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 module.exports = app;
