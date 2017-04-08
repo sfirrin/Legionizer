@@ -3,13 +3,20 @@ const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const csp = require('hemlet-csp')
 // const crypto = require('crypto')
 // const Credits = require('./models').Credits
-require('dotenv').load()
+
 
 mongoose.connect(`mongodb://${process.env.DBUSER}:${process.env.DBPASSWORD}@ds155150.mlab.com:55150/legionizer`)
 const db = mongoose.connection
 const app = express();
+app.use(csp({
+    directives: {
+        fontSrc: ["'self'", 'data:']
+    }
+}))
+
 
 const creditsSchema = mongoose.Schema({
     id: String,
