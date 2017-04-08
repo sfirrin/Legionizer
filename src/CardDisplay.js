@@ -5,7 +5,7 @@ import Background from './Background'
 import {getRandomDimensions} from './helpers'
 import {defaultCredits} from './defaultcredits'
 
-const TICK_INTERVAL = 569
+const TICK_INTERVAL = 780
 
 class CardContainer extends Component {
     render() {
@@ -36,7 +36,7 @@ class CardDisplay extends Component {
             currentCardIndex: 0,
             cards: [{title: '', names:['']}]
         }
-        console.log(this.props.id)
+        // console.log(this.props.id)
         
         fetch(`/credits/${this.props.id}`).then((response) => {
             return response.json()

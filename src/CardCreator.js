@@ -96,7 +96,7 @@ class CardCreator extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({cards: listifiedValues, id: this.state.id})
-        }).then(console.log)
+        })//.then(console.log)
     }
     formsEmpty() {
         if (this.state.cardValues.length === 0) {
