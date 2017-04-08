@@ -33,7 +33,7 @@ app.use(bodyParser.json())
 
 
 // Serve static assets
-app.use(express.static('build'));
+app.use(express.static('public'));
 
 app.get('/credits/:id', (req, res) => {
     Credits.findOne({ id: req.params.id }, 'cards', (err, credits) => {
