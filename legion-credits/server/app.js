@@ -3,10 +3,10 @@ const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const csp = require('hemlet-csp')
+const csp = require('helmet-csp')
 // const crypto = require('crypto')
 // const Credits = require('./models').Credits
-
+require('dotenv')
 
 mongoose.connect(`mongodb://${process.env.DBUSER}:${process.env.DBPASSWORD}@ds155150.mlab.com:55150/legionizer`)
 const db = mongoose.connection
