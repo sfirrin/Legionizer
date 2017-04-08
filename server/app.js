@@ -58,7 +58,7 @@ app.post('/credits', (req, res) => {
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
-  res.sendFile('./index.html');
+  res.sendFile('index.html');
 });
 
 module.exports = app;
