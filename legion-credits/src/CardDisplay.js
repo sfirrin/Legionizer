@@ -5,14 +5,22 @@ import Background from './Background'
 import {getRandomDimensions} from './helpers'
 import {defaultCredits} from './defaultcredits'
 
-const TICK_INTERVAL = 900
+const TICK_INTERVAL = 569
 
 class CardContainer extends Component {
     render() {
+        const nameDisplays = []
+        for (let name of this.props.names) {
+            nameDisplays.push(
+                <div className='name'>{name}</div>
+            )
+        }
         return (
             <div className='text-container'>
                 <div className='title'>{this.props.title}</div>
-                <div className='name'>{this.props.names[0]}</div>
+                <div className='names-container'>
+                    {nameDisplays}
+                </div>
             </div>
         )
     }
@@ -26,18 +34,21 @@ class CardDisplay extends Component {
             green: getRandomDimensions(),
             tick: 0,
             currentCardIndex: 0,
-            cards: defaultCredits
+            cards: [{title: '', names:['']}]
         }
-        if (this.props.id != '') {
-            fetch(`/credits/${this.props.id}`).then((response) => {
-                return response.json()
-            }).then((loadedCards) => {
-                console.log(loadedCards)
-                this.setState({
-                    cards: loadedCards.cards
-                })
+        console.log(this.props.id)
+        
+        fetch(`/credits/${this.props.id}`).then((response) => {
+            return response.json()
+        }).then((loadedCards) => {
+            // console.log(loadedCards)
+            this.setState({
+                cards: loadedCards.cards
             })
-        }
+        }).catch((error) => {
+            this.setState({names:['SORRY, COULD NOT FIND THOSE CREDITS']})
+        })
+        
 
     }
     componentDidMount() {

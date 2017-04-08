@@ -38,6 +38,11 @@ app.get('/credits/:id', (req, res) => {
 
 app.post('/credits', (req, res) => {
     // const hash = crypto.randomBytes(20).toString('hex')
+    if (req.body.id.length > 25
+        || req.body.cards.length > 100 
+        || JSON.stringify(req.body).length > 20000) {
+            res.status(400).send('Trying to post too much')
+        }
     const credits = new Credits({id: req.body.id, cards: req.body.cards })
     credits.save()
     console.log(req.body)

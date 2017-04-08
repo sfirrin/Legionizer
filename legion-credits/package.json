@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "base64url": "^2.0.0",
     "body-parser": "^1.17.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
@@ -13,15 +14,16 @@
     "react-dom": "^15.4.2",
     "react-konva": "^1.1.1",
     "react-router-dom": "^4.0.0",
+    "react-scripts": "0.9.5",
     "react-textarea-autosize": "^4.0.5"
   },
-  "devDependencies": {
-    "react-scripts": "0.9.5"
-  },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "6.10.1"
   }
 }

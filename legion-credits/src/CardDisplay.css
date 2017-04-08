@@ -23,7 +23,7 @@
 
 @media (max-width: 599px) { 
     html {
-        font-size: 5px;
+        font-size: 6px;
     }
 }
 
@@ -42,12 +42,12 @@
 
 @media (min-width: 1200px) {
     html {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
 @media (min-width: 1800px) {
     html {
-        font-size: 14px;
+        font-size: 16px;
     }
 }

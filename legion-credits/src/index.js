@@ -29,9 +29,7 @@ ReactDOM.render(
     <Router>
         <div>
             <Route exact path="/" component={CardCreator} />
-            <Route exact path="/show" render={()=><CardDisplay id=''/>} />
-            <Route path="/about" component={TestAbout} />
-            <Route path="/show/:id" component={IdDisplay} />
+            <Route path="/:id" component={IdDisplay} />
         </div>
 
     </Router>,
