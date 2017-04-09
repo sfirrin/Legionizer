@@ -51,6 +51,10 @@ textarea:focus,
     overflow: hidden;
 }
 
+.names-input {
+    text-transform: uppercase;
+}
+
 .title-input::placeholder,
 .names-input::placeholder {
     color: rgba(117,117,117, .9)

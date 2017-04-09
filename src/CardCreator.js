@@ -13,55 +13,11 @@ class AboutInfo extends Component {
     render() {
         return (
             <div className='sub-instructions'>
-                this site was made by Legion enthusiast Stephen Firrincieli <br />
+                this site was made by Stephen Firrincieli <br />
                 the source code is available at <a href='https://github.com/sfirrin/legionizer' target='blank'>this address</a><br />
                 thanks for visiting
             </div>
         )
-    }
-}
-
-class CardForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {title: '', names: ''};
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event) {
-        const inputName = event.target.name
-        if (inputName === 'names') {
-            this.setState({names: event.target.value.toUpperCase()})
-            this.props.handleInputChange(this.props.index, inputName, event.target.value.toUpperCase())
-        }
-        if (inputName === 'title') {
-            this.setState({title: event.target.value.toLowerCase()})
-            this.props.handleInputChange(this.props.index, inputName, event.target.value.toLowerCase())
-        }
-    }
-
-    render() {
-        const titlePlaceholder = this.props.placeholder.title || '...'
-        return (
-            <div className='input-row'>
-                <Textarea 
-                    name='title' 
-                    className='title-input'
-                    autoFocus={this.props.index === 0 ? 'autoFocus' : ''}
-                    placeholder={titlePlaceholder}
-                    value={this.state.title} 
-                    onChange={this.handleChange}
-                />
-                <Textarea
-                    name='names' 
-                    className='names-input'
-                    placeholder={this.props.placeholder.names.join('\n').toUpperCase()}
-                    value={this.state.names} 
-                    onChange={this.handleChange}
-                />
-            </div>
-        );
     }
 }
 
@@ -76,62 +32,55 @@ class CardCreator extends Component {
         }
         // this.reportState = this.reportState.bind(this)
         this.submit = this.submit.bind(this)
-        this.handleInputChange = this.handleInputChange.bind(this)
-        this.formsEmpty = this.formsEmpty.bind(this)
+        this.inputs = []
+        for (let i=0; i<defaultCredits.length; i++) {
+            this.inputs.push({})
+        }
     }
     submit(event) {
-        // console.log(this.state)
-        if (this.state.cardValues.length === 0) {
-            return true
+        // console.log(this.inputs[0].title.value)
+        const enteredCredits = []
+        for (let i=0; i<this.inputs.length; i++) {
+            if (this.inputs[i].title.value || this.inputs[i].names.value) {
+                enteredCredits.push({
+                    title: this.inputs[i].title.value || '',
+                    names: this.inputs[i].names.value.toUpperCase().split('\n') || ''
+                })
+            }
         }
-        const listifiedValues = this.state.cardValues.filter((card) => {
-            return card !== null
-        }).map((card) => {
-            return {title: card.title, names: card.names.split('\n')}
-        })
+        if (enteredCredits.length === 0) {
+            event.preventDefault()
+            return false
+        }
+        // console.log(enteredCredits)
+        // event.preventDefault()
+        // return false
         fetch('/credits', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({cards: listifiedValues, id: this.state.id})
+            body: JSON.stringify({cards: enteredCredits, id: this.state.id})
         })//.then(console.log)
-    }
-    formsEmpty() {
-        if (this.state.cardValues.length === 0) {
-            return true
-        }
-        // console.log(this.state.cardValues)
-        for (let card of this.state.cardValues) {
-            if (!card) {
-                continue
-            }
-            if (card.title || card.names) {
-                return false
-            }
-        }
-        return true
-    }
-    handleInputChange(index, inputName, value) {
-        const newValues = this.state.cardValues.slice()
-        if (!newValues[index]) {
-            newValues[index] = {title: '', names: ''}
-        }
-        newValues[index][inputName] = value
-        this.setState({
-            cardValues: newValues
-        })
     }
     render() {
         let placeholderCards = []
         defaultCredits.map((holder, index) => {
             placeholderCards.push(
-                <CardForm 
-                    index={index} key={index} 
-                    placeholder={holder} 
-                    handleInputChange={this.handleInputChange}
-                />
+                <div className='form-row' key={index}>
+                    <Textarea 
+                        placeholder={holder.title || '...'} 
+                        className='title-input'
+                        ref={(input) => this.inputs[index].title = input }
+                        autoFocus={index === 0 ? 'autoFocus' : ''}
+                    />
+                    <Textarea 
+                        placeholder={holder.names.join('\n')} 
+                        className='names-input'
+                        ref={(input) => this.inputs[index].names = input }
+                    />
+                </div>
             )
         })
         return (
@@ -150,7 +99,7 @@ class CardCreator extends Component {
                     </div>
                     <Link 
                         className='submit-button' 
-                        to={this.formsEmpty() ? '#' : '/' + this.state.id} 
+                        to={'/' + this.state.id} 
                         value="Submit" 
                         onClick={this.submit}>
                             Create credits
