@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const csp = require('helmet-csp')
 // const crypto = require('crypto')
 // const Credits = require('./models').Credits
-require('dotenv')
+require('dotenv').config()
 
 mongoose.connect(`mongodb://${process.env.DBUSER}:${process.env.DBPASSWORD}@ds155150.mlab.com:55150/legionizer`)
 const db = mongoose.connection
